@@ -210,16 +210,29 @@ No son bueno valores de jitter ya que son muy elevados (la media permitida segú
 
 15. Identifica la trama donde se finaliza la conversación.
  ** ¿Qué método SIP se utiliza?
+
+Utiliza el método BYE
+
  ** ¿En qué trama(s)?
+
+Se envía en las tramas: 924, 925, 927, 933
+
  ** ¿Por qué crees que se envía varias veces?
 
+Porque no recibe su ACK, bien sea por que el paquete se ha perdido o porque se ha vencido su plazo de expiración.
 
 16. Finalmente, se cierra la aplicación de VozIP.
  ** ¿Por qué aparece una instrucción SIP del tipo REGISTER?
+
+Para poder borrar al usuario con el valor de expire a 0. Así lo hicimos en la práctica 4.
+
  ** ¿En qué trama sucede esto?
+
+En la 950 y la 952
+
  ** ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión)?
 
-
+Se diferencia en el valor de campo expires. Antes tenía un valor de 3600 y ahora tiene un valor de 0.
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
