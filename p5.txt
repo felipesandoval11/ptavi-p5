@@ -205,8 +205,12 @@ No son bueno valores de jitter ya que son muy elevados (la media permitida segú
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
  ** ¿Cuánto dura la conversación?
+
+Dura aproximadamente 25 segundos. Comienza en el segundo 14.59 y termina en el 39.22
+
  ** ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
 
+SSRC 0xBF4AFD37 y 0x43306582. Hay varios SSRCs ya que uno es para el audio y el otro es para el vide. No hay CSRCs.
 
 15. Identifica la trama donde se finaliza la conversación.
  ** ¿Qué método SIP se utiliza?
