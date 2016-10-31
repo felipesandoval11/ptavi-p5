@@ -111,7 +111,7 @@ REGISTER
 
  ** Además de REGISTER, ¿qué instrucciones SIP entiende el UA?
 
-INVITE, ACK, CANCEL, BYE, OPTIONS, NOTIFY, MESSAGE, etc.
+INVITE, ACK, CANCEL, BYE, OPTIONS, NOTIFY, MESSAGE, REFER.
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
@@ -122,25 +122,53 @@ No
 
  ** ¿Cómo sabemos si el registro se ha realizado correctamente o no?
 
-Cuando el SIP response code comience por 2XX
+Cuando el SIP response code comience por 2XX.
 
  ** ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro? (fíjate en el tamaño de los paquetes y mira a qué se debe el cambio)
+ 
+Con el primer intento de registo obtenemos una respuesta de 401 No Autorizado mientras que con el segundo intento obtenemos la respuesta correcta 200 OK.
+El primer REGISTER tiene una longitud de 523 bytes ya que no contiene en su Header el campo de Authorization mientras que el segundo, con una longitud de 712 bytes, si lo contiene.
+ 
  ** ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
 
+3600 segundos
 
 10. Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la dirección sip:500@ekiga.net. Veamos el INVITE de cerca.
  ** ¿Puede verse el nombre del que efectúa la llamada, así como su dirección SIP?
+
+Si. Efectúa la llamada Gregorio Robles y su dirección sip:grex@ekiga.net
+
  ** ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
+
+El cuerpo de la trama describe la sesión por ende viene en formato SIP/SDP. Contiene la información de la conexión, atributos del medio y descripción del tipo multimedia empleado, en este caso un video.
+
  ** ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
+ 
+No tiene éxito ya que obtiene una respuesta con el número de secuencia del INVITE con status 407 Autenticación de Proxy Requerida.
+
  ** ¿En qué se diferencia el segundo INVITE más abajo del primero? ¿A qué crees que se debe esto?
 
+En la segunda se envia la autorización del proxy previamente solicitada.
 
 11. Una vez conectado, estudia el intercambio de tramas.
  ** ¿Qué protocolo(s) se utiliza(n)? ¿Para qué sirven estos protocolos?
+
+Se utilizan los protocolos RTP y el H.261. El H.261 es un codec de vídeo para servicios audiovisuales y el RTP es un protocolo para el envio de tramas en directo de información multimedia.
+
  ** ¿Cuál es el tamaño de paquete de los mismos?
+
+El tamaño de los paquetes de RTP es de 214 bytes por paquete mientras que para los paquetes de H.261 su tamaño es variable.
+
  ** ¿Se utilizan bits de padding?
+
+No ya que el bit de padding (relleno) está a 0
+
  ** ¿Cuál es la periodicidad de los paquetes que se envían?
+
+aproximadamente 20 - 22 ms
+
  ** ¿Cuántos bits/segundo estamos enviando?
+
 
 
 
@@ -148,10 +176,23 @@ Cuando el SIP response code comience por 2XX
 
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una opción RTP. Empecemos mirando los flujos RTP.
  ** ¿Cuántos flujos hay? ¿por qué?
+
+Dos. Uno con salida desde el puerto 5014 y otro con salida desde el puerto 5010. Un flujo corresponderá al audio y el otro flujo al vídeo.
+
  ** ¿Cuántos paquetes se pierden?
+ 
+Se pierden 2 paquetes de 194 enviados por el puerto 5014.
+ 
  ** ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el valor de delta?
+ 
+1290.479 para el puerto 5014 y 1290.444 para el puerto 5010
+El valor de delta es la diferencia en tiempo entre el paquete actual y el paquete anterior del streaming, el max delta es así la mayor diferencia de tiempo.
+
  ** ¿Cuáles son los valores de jitter (medio y máximo)? ¿Qué quiere decir eso? ¿Estamos ante una conversación de calidad?
 
+El valor de jitter máximo es de 203.26ms y el valor de jitter medio es de 154.04ms. (Esto es el análisis en ambos flujos)
+
+No son bueno valores de jitter ya que son muy elevados (la media permitida según internet es de 40ms) y por lo tanto no estamos ante una conversación de calidad.
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony -> RTP -> Stream Analysis.
  ** ¿Cuánto valen el delta y el jitter para el primer paquete que ha llegado?
