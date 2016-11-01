@@ -196,11 +196,28 @@ No son bueno valores de jitter ya que son muy elevados (la media permitida segú
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony -> RTP -> Stream Analysis.
  ** ¿Cuánto valen el delta y el jitter para el primer paquete que ha llegado?
+
+Ambos valen 0
+
  ** ¿Podemos saber si éste es el primer paquete que nos han enviado?
+
+Si podemos, ya que tiene un retraso de 0.00 y además por su número de secuencia
+
  ** Los valores de jitter son menores de 10ms hasta un paquete dado. ¿Cuál?
+
+Hasta el paquete 246
+
  ** ¿A qué se debe el cambio tan brusco del jitter?
+
+Se debe a la disminución de ancho de banda, que venía de manera constante y luego disminuyó (de 62.40 a 28.80). También se puede deber al cambio en los valores de Delta.
+
  ** ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué?
+ 
+ Si, ya que el valor de Delta me refleja el valor de llegada del paquete actual en comparación con el paquete anterior. Por ende si el valor de la delta aumenta el valor de jitter también lo hará.
+ 
  ** ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de jitter?
+
+Mientras más tiempo tarde en llegarme un paquete mayor será su variabilidad (jitter) y me afectará al momento de tener una comunicación sin interrupciones.
 
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
