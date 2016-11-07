@@ -171,7 +171,6 @@ aproximadamente 20 - 22 ms
 
 
 
-
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una opción RTP. Empecemos mirando los flujos RTP.
@@ -219,7 +218,6 @@ Se debe a la disminución de ancho de banda, que venía de manera constante y lu
 
 Mientras más tiempo tarde en llegarme un paquete mayor será su variabilidad (jitter) y me afectará al momento de tener una comunicación sin interrupciones.
 
-
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
  ** ¿Cuánto dura la conversación?
 
@@ -266,17 +264,37 @@ Captura una sesión SIP de una conversación con el número SIP sip:9999@qxip.ne
 
 17. Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
  ** ¿Es necesario el uso de DNS y STUN? ¿Por qué?
+
+DNS es necesario ya que haremos solicitudes al servidor de ekiga.net
+STUN no es necesario ya que la dirección IP del laboratorio es una IP pública y no es necesario su traducción a través de STUN-NAT.
+
  ** ¿Son diferentes el registro y la descripción de la sesión?
+
+Si ya que me registro con mis datos de USUARIO y la descripción de la sesión es distinta ya que estamos llamando a un usuario distinto.
 
 
 18. Identifica las diferencias existentes entre esta conversación y la conversación anterior:
  ** ¿Cuántos flujos tenemos?
+
+Tenemos dos flujos. Uno de ida y otro de vuelta. En la captura anterior haciamos una prueba de eco con nosotros mismos.
+
  ** ¿Cuál es su periodicidad?
+
+20 ms apróx.
+
  ** ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
+
+desde mi máquina (212.128.254.148) tengo un valor max de delta 30.58, medio del jitter: 3.018 y max jitter 4.632
+
+desde sip:music@iptel.org (212.79.111.155) tengo un valor max de delta 65.56, medio del jitter: 1.312 y max jitter 4.632
+
  ** ¿Podrías reproducir la conversación desde Wireshark? ¿Cómo? Comprueba que poniendo un valor demasiado pequeño para el buffer de jitter, la conversación puede no tener la calidad necesaria.
+
+Si se puede reproducir.
+
  ** ¿Sabrías decir qué tipo de servicio ofrece sip:9999@qxip.net?
 
-
+un servicio de música. Se ha llamado a sip:music@iptel.org
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
