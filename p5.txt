@@ -171,7 +171,7 @@ aproximadamente 20ms - 22 ms
 
 Se envían entre 39 y 40 paquetes de RTP por segundo.
 Cada uno tiene 214 bytes. De los cuales 160 bytes de PAYLOAD: 160x8 = 1280bits
-La perodicidad = 0.02 segundos, entonces 1280bits/20/1000 sec = 64.000bits/sec
+La periodicidad = 0.02 segundos, entonces 1280bits/20/1000 sec = 64.000bits/sec
 64KBytes per second.
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
@@ -283,7 +283,7 @@ Tenemos dos flujos. Uno de ida y otro de vuelta. En la captura anterior hacíamo
 
  ** ¿Cuál es su periodicidad?
 
-20 ms apróx.
+20 ms aproximadamente.
 
  ** ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
 
